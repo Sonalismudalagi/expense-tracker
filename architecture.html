@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Expense Tracker Architecture</title>
+
+  <style>
+    body{
+      font-family: Arial;
+      background:#f4f7fb;
+      margin:0;
+      padding:30px;
+    }
+
+    h1{
+      text-align:center;
+      color:#0f4c81;
+      margin-bottom:40px;
+    }
+
+    .main{
+      display:flex;
+      justify-content:center;
+      gap:30px;
+      flex-wrap:wrap;
+    }
+
+    .layer{
+      background:white;
+      border-radius:15px;
+      padding:20px;
+      width:280px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.15);
+      border-top:8px solid #0ea5e9;
+    }
+
+    .layer h2{
+      text-align:center;
+      color:#0f172a;
+      margin-bottom:20px;
+    }
+
+    .box{
+      background:#e0f2fe;
+      border-radius:10px;
+      padding:15px;
+      margin-bottom:15px;
+      text-align:center;
+      font-weight:bold;
+      color:#0f172a;
+    }
+
+    .aws{
+      background:#fff7ed;
+    }
+
+    .db{
+      background:#dcfce7;
+    }
+
+    .analytics{
+      background:#ede9fe;
+    }
+
+    .arrow{
+      text-align:center;
+      font-size:40px;
+      color:#0ea5e9;
+      margin-top:120px;
+    }
+
+    .icon{
+      font-size:40px;
+      margin-bottom:10px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<h1>Expense Tracker System Architecture</h1>
+
+<div class="main">
+
+  <!-- USER -->
+  <div class="layer">
+    <h2>User Layer</h2>
+
+    <div class="box">
+      <div class="icon">👤</div>
+      User / Admin
+    </div>
+
+    <div class="box">
+      HTTP Requests<br>
+      GET / POST
+    </div>
+  </div>
+
+  <div class="arrow">➡️</div>
+
+  <!-- FRONTEND -->
+  <div class="layer">
+    <h2>Frontend Layer</h2>
+
+    <div class="box">
+      <div class="icon">⚛️</div>
+      React JS Frontend
+    </div>
+
+    <div class="box">
+      Dashboard Module
+    </div>
+
+    <div class="box">
+      Analytics Module
+    </div>
+
+    <div class="box">
+      PDF Upload Module
+    </div>
+  </div>
+
+  <div class="arrow">➡️</div>
+
+  <!-- BACKEND -->
+  <div class="layer">
+    <h2>Backend Layer</h2>
+
+    <div class="box">
+      <div class="icon">🐍</div>
+      Flask REST API
+    </div>
+
+    <div class="box">
+      PDF Parser<br>
+      pdfplumber + Regex
+    </div>
+
+    <div class="box">
+      Duplicate Detection<br>
+      using UTR
+    </div>
+
+    <div class="box">
+      Auto Category Detection
+    </div>
+  </div>
+
+  <div class="arrow">➡️</div>
+
+  <!-- DATABASE -->
+  <div class="layer">
+    <h2>Database Layer</h2>
+
+    <div class="box db">
+      <div class="icon">🗄️</div>
+      SQLite Database
+    </div>
+
+    <div class="box db">
+      Users Table
+    </div>
+
+    <div class="box db">
+      Expenses Table
+    </div>
+  </div>
+
+</div>
+
+<br><br>
+
+<div class="main">
+
+  <!-- ANALYTICS -->
+  <div class="layer analytics">
+    <h2>Analytics Engine</h2>
+
+    <div class="box analytics">
+      <div class="icon">📊</div>
+      Chart.js
+    </div>
+
+    <div class="box analytics">
+      Pie / Bar Charts
+    </div>
+
+    <div class="box analytics">
+      Burn Rate Analysis
+    </div>
+
+    <div class="box analytics">
+      Savings & KPI Cards
+    </div>
+
+    <div class="box analytics">
+      Heatmap Visualization
+    </div>
+  </div>
+
+  <!-- AWS -->
+  <div class="layer aws">
+    <h2>AWS Deployment</h2>
+
+    <div class="box aws">
+      <div class="icon">☁️</div>
+      AWS S3 Hosting
+    </div>
+
+    <div class="box aws">
+      AWS EC2 Backend
+    </div>
+
+    <div class="box aws">
+      CloudFront CDN
+    </div>
+
+    <div class="box aws">
+      AWS RDS<br>
+      Future Scope
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
