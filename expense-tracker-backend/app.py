@@ -201,8 +201,8 @@ def upload_pdf():
                 desc = description.lower()
 
                 if any(word in desc for word in [
-                    "zomato", "swiggy", "restaurant",
-                    "cafe", "pizza", "hotel"
+                    "zomato", "swiggy", "restaurant","lemon",
+                    "cafe", "pizza", "hotel", "spice box","milk","sweets","cafeteria","veg","fruits","vegetables","coffee","tea"
                 ]):
                     category = "Food"
 
@@ -213,21 +213,25 @@ def upload_pdf():
                     category = "Travel"
 
                 elif any(word in desc for word in [
-                    "medical", "hospital", "pharmacy"
+                    "medical", "hospital", "pharmacy","sanjeevani"
                 ]):
                     category = "Health"
 
                 elif any(word in desc for word in [
                     "amazon", "flipkart", "mall",
-                    "store"
+                    "store","stores","ekart","electronics"
                 ]):
                     category = "Shopping"
 
                 elif any(word in desc for word in [
                     "electricity", "water",
-                    "recharge", "bill"
+                    "recharge", "bill","jiohotstar","netflix","aws"
                 ]):
                     category = "Bills"
+                elif any(word in desc for word in [
+                    "zam zam","books","pen","pencil","print","karthik","zerox","xerox"
+                ]):
+                    category = "Education"
 
                 # INSERT ONLY IF VALID
                 if amount > 0 and description:
