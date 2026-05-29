@@ -16,7 +16,9 @@ function Analytics() {
   const [selectedMonth, setSelectedMonth] = useState(
     new Date().toISOString().slice(0, 7)
   );
-
+  const [selectedYear, setSelectedYear] = useState(
+  new Date().getFullYear()
+  );
   const [budget, setBudget] = useState(5000);
 
   const lineRef = useRef();
@@ -51,7 +53,13 @@ function Analytics() {
       })
       .catch(() => setLoading(false));
   }, [user]);
-
+  const availableYears = [
+  ...new Set(
+    expenses.map((e) =>
+      new Date(e.date).getFullYear()
+    )
+  ),
+];
   // FILTER
   const filteredExpenses = expenses.filter((e) => {
     if (!fromDate && !toDate) return true;
@@ -119,25 +127,41 @@ const burnRate = income
   }
 
   // LINE
-  const todayMonthIndex = new Date().getMonth();
-  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const months = [
+  "Jan","Feb","Mar","Apr",
+  "May","Jun","Jul","Aug",
+  "Sep","Oct","Nov","Dec"
+];
 
-  const monthlyTotals = new Array(12).fill(0);
-  expenses.forEach((e) => {
-    const m = new Date(e.date).getMonth();
-    monthlyTotals[m] += e.amount;
-  });
+const monthlyTotals = new Array(12).fill(0);
 
-  const lineData = {
-    labels: months.slice(0, todayMonthIndex + 1),
-    datasets: [{
-      label: "Monthly Expense",
-      data: monthlyTotals.slice(0, todayMonthIndex + 1),
+expenses.forEach((e) => {
+
+  const dateObj = new Date(e.date);
+
+  const year = dateObj.getFullYear();
+
+  if (year === Number(selectedYear)) {
+
+    const month = dateObj.getMonth();
+
+    monthlyTotals[month] += e.amount;
+  }
+});
+
+const lineData = {
+  labels: months,
+
+  datasets: [
+    {
+      label: `Expenses ${selectedYear}`,
+      data: monthlyTotals,
       borderColor: "#38bdf8",
+      backgroundColor: "#38bdf8",
       tension: 0.4,
-    }],
-  };
-
+    },
+  ],
+};
   // CATEGORY
   const categoryTotals = {};
   filteredExpenses.forEach((e) => {
@@ -232,6 +256,23 @@ const burnRate = income
         <div style={styles.gridSmall}>
           <div style={styles.card}>
             <h3>Trend</h3>
+            <select
+              value={selectedYear}
+              onChange={(e) =>
+                setSelectedYear(e.target.value)
+              }
+              style={{
+                marginBottom: "10px",
+                padding: "8px",
+                borderRadius: "6px",
+              }}
+            >
+              {availableYears.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
             <Line ref={lineRef} data={lineData} height={120} />
             <button onClick={() => exportPNG(lineRef, "trend.png")}>Export</button>
           </div>
